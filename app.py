@@ -28,6 +28,8 @@ from dialogs import TextDialog, AdjustmentDialog, text_image
 from jobs import JobRunner, filtered_document, keyed_document, segmented_document
 from segmentation import Segmenter
 from psdio import import_documents, load_psd
+from save_dialog import (choose_save_destination,default_directory,PROJECT_FORMATS,IMAGE_FORMATS,PSD_FORMATS,TIFF_FORMATS)
+from version import VERSION
 
 BG, PANEL, TEXT, ACCENT = "#191c23", "#232833", "#dbe2ed", "#67afff"
 
@@ -62,6 +64,8 @@ class Editor:
         root.configure(bg=BG)
         self.document, self.history = Document(), History()
         self.path, self.dirty = None, False
+        self.output_directory=None
+        self.save_requires_location=False
         self.tool = tk.StringVar(value="move")
         self.mask_target = tk.BooleanVar(value=False)
         self.radius = tk.IntVar(value=16)
@@ -173,7 +177,7 @@ class Editor:
         ttk.Label(top, text="COMPOSITOR", font=("Segoe UI", 16, "bold"), foreground=ACCENT).pack(side="left", padx=(0, 18))
         for name, action in (("新建", self.new_document), ("导入", self.import_images), ("保存", self.save), ("导出", self.export)):
             ttk.Button(top, text=name, command=action).pack(side="left", padx=3)
-        ttk.Label(top, text="Windows 预览版 0.4", foreground="#97a4b9").pack(side="right")
+        ttk.Label(top, text="Windows 预览版 "+VERSION, foreground="#97a4b9").pack(side="right")
         body = ttk.Frame(self.root)
         body.pack(fill="both", expand=True)
         left = ttk.Frame(body, width=96, padding=(7, 12))
@@ -637,10 +641,10 @@ class Editor:
         if answer: self.save(after=action,lock_document=True)
         else: action()
 
-    def start_job(self,label,function,args,on_success,lock_document=False,cancellable=True):
+    def start_job(self,label,function,args,on_success,lock_document=False,cancellable=True,on_error=None):
         if self.jobs.current:
             self.status.set("正在"+self.jobs.current.label+"，请等待。"); return False
-        self.jobs.start(label,function,args,on_success,lock_document,cancellable)
+        self.jobs.start(label,function,args,on_success,lock_document,cancellable,on_error)
         self.status.set("正在"+label+"… 可继续查看画布。")
         self.progress.pack(side="right",padx=8); self.progress.start(12)
         if cancellable: self.cancel_job_button.pack(side="right",padx=4)
@@ -659,11 +663,28 @@ class Editor:
             result=job.future.result()
             job.on_success(result)
         except Exception as error:
+            if job.on_error and job.on_error(error):return
             self.status.set(job.label+"未完成："+str(error))
             messagebox.showerror("操作未完成",str(error),parent=self.root)
 
     def cancel_job(self):
         self.jobs.cancel(); self.status.set("正在取消… 当前计算结束后丢弃结果。")
+
+    def output_available(self):
+        if self.jobs.current:
+            self.status.set("正在"+self.jobs.current.label+"，完成后可再次保存或导出。")
+            return False
+        return True
+
+    def choose_output(self,title,formats,name):
+        return choose_save_destination(self.root,title,default_directory(self.output_directory,self.path),name,formats)
+
+    def output_error(self,error,path,project=False):
+        if not isinstance(error,PermissionError):return False
+        if project:self.save_requires_location=True
+        self.status.set("保存位置无法写入，请重新选择位置；当前工程仍可继续编辑。")
+        messagebox.showerror("无法写入保存位置",f"无法写入：{path}\n\n请再次保存或导出，点击“浏览”选择其他文件夹。当前画布仍保留，可以继续编辑。",parent=self.root)
+        return True
 
     @guarded
     def new_document(self):
@@ -722,9 +743,10 @@ class Editor:
 
     @guarded
     def save(self, as_new=False, after=None, lock_document=False):
+        if not self.output_available():return False
         path = self.path
-        if as_new or path is None:
-            result = filedialog.asksaveasfilename(title="保存 .comp 工程（将创建文件夹）", defaultextension=".comp", filetypes=[("Compositor 工程", "*.comp")], parent=self.root)
+        if as_new or path is None or self.save_requires_location:
+            result=self.choose_output("保存 .comp 工程",PROJECT_FORMATS,path.name if path else "未命名.comp")
             if not result: return False
             path = Path(result)
         signature=(self.document.id,self.scene_revision)
@@ -732,41 +754,51 @@ class Editor:
         def saved(result):
             if self.document.id==signature[0]:
                 self.path=Path(path)
+                self.output_directory=Path(path).parent
+                self.save_requires_location=False
                 if self.scene_revision==signature[1]: self.dirty=False
                 self.refresh()
             self.status.set(f"工程已保存：{path}"+("；后续编辑尚未保存。" if self.dirty else ""))
             if after: after()
-        self.start_job("保存工程",save_project,(snapshot,path),saved,lock_document,False)
+        self.start_job("保存工程",save_project,(snapshot,path),saved,lock_document,False,lambda error:self.output_error(error,path,True))
         return False  # A pending save must never authorize discarding the live document.
 
     @guarded
     def export(self):
-        path = filedialog.asksaveasfilename(title="导出合成图片", defaultextension=".png", filetypes=[("PNG（保留透明）", "*.png"), ("JPEG（白色底）", "*.jpg")], parent=self.root)
+        if not self.output_available():return
+        path=self.choose_output("导出合成图片",IMAGE_FORMATS,(self.path.stem if self.path else "未命名")+".png")
         if not path: return
-        self.start_job("导出图片",export_image,(self.document.snapshot(),path),lambda _:self.status.set(f"图片已导出：{path}"),False,False)
+        def done(_):
+            self.output_directory=Path(path).parent;self.status.set(f"图片已导出：{path}")
+        self.start_job("导出图片",export_image,(self.document.snapshot(),path),done,False,False,lambda error:self.output_error(error,path))
 
     @guarded
     def export_raw_tiff(self):
+        if not self.output_available():return
         from rawio import export_raw_tiff,RAW_EXTENSIONS
         from extended_dialogs import RawDialog
         source=filedialog.askopenfilename(title="选择 RAW 原文件，直接显影为 16 位 TIFF",filetypes=[("相机 RAW"," ".join("*"+ext for ext in RAW_EXTENSIONS)),("全部文件","*.*")],parent=self.root)
         if not source:return
         options=RawDialog(self.root,16).result
         if options is None:return
-        target=filedialog.asksaveasfilename(title="16 位 RAW 显影输出",defaultextension=".tif",filetypes=[("16 位 RGB TIFF","*.tif *.tiff")],parent=self.root)
+        target=self.choose_output("16 位 RAW 显影输出",TIFF_FORMATS,Path(source).stem+".tif")
         if not target:return
         def run():return export_raw_tiff(source,target,**options)
-        self.start_job("RAW 16 位显影导出",run,(),lambda size:self.status.set(f"已导出 {size[0]}×{size[1]} 的 16 位 TIFF：{target}"),False,False)
+        def done(size):
+            self.output_directory=Path(target).parent;self.status.set(f"已导出 {size[0]}×{size[1]} 的 16 位 TIFF：{target}")
+        self.start_job("RAW 16 位显影导出",run,(),done,False,False,lambda error:self.output_error(error,target))
 
     @guarded
     def export_psd(self,compatible=False):
+        if not self.output_available():return
         from psdexport import export_psd
-        path=filedialog.asksaveasfilename(title="导出分层 PSD",defaultextension=".psd",filetypes=[("Photoshop 分层工程","*.psd")],parent=self.root)
+        path=self.choose_output("导出分层 PSD",PSD_FORMATS,(self.path.stem if self.path else "未命名")+".psd")
         if not path: return
         def done(notes):
+            self.output_directory=Path(path).parent
             self.status.set(f"分层 PSD 已导出：{path}")
             if notes: messagebox.showinfo("PSD 导出说明","\n".join(notes),parent=self.root)
-        self.start_job("导出分层 PSD",export_psd,(self.document.snapshot(),path,compatible),done,False,False)
+        self.start_job("导出分层 PSD",export_psd,(self.document.snapshot(),path,compatible),done,False,False,lambda error:self.output_error(error,path))
 
     def undo(self):
         if self.jobs.current and self.jobs.current.lock_document: return
@@ -1050,7 +1082,7 @@ class Editor:
         messagebox.showinfo("快速使用", "1. 新建画布并导入图片\n2. V 移动，角点缩放、圆点旋转，Shift 约束比例或角度\n3. 滚轮缩放，右键拖动平移；Ctrl+0 适合窗口\n4. T 添加/编辑文字，双击文字或调整层重新编辑\n5. “调整层”菜单添加曝光、色阶、曲线、反相或模糊\n6. B 画笔、E 橡皮；勾选编辑蒙版可修整蒙版\n7. Ctrl+S 保存 .comp；Ctrl+Shift+E 导出 PNG/JPEG\n\n完整说明见发行文件夹中的 README-中文.md。", parent=self.root)
 
     def about(self):
-        messagebox.showinfo("关于", "Compositor Windows 0.4\n独立 Windows 移植预览版，非上游官方发行版。\nMIT 开源。\n\n"+self.preview_renderer.backend_label+"\n本地 AI 分割、RAW / 16 位 TIFF、分层 PSD 与兼容导出\n12 种调整、六种图层效果、文字排版、原像素分块和后台操作。\n兼容范围与验证记录见 README-中文.md。", parent=self.root)
+        messagebox.showinfo("关于", "Compositor Windows "+VERSION+"\n独立 Windows 移植预览版，非上游官方发行版。\nMIT 开源。\n\n"+self.preview_renderer.backend_label+"\n本地 AI 分割、RAW / 16 位 TIFF、分层 PSD 与兼容导出\n12 种调整、六种图层效果、文字排版、原像素分块和后台操作。\n兼容范围与验证记录见 README-中文.md。", parent=self.root)
 
     def callback_error(self, kind, error, trace):
         traceback.print_exception(kind, error, trace)

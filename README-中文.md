@@ -1,12 +1,18 @@
-# Compositor Windows 0.4 使用说明
+# Compositor Windows 0.4.1 使用说明
 
 这是参考 [Compositor v1.4.6](https://github.com/robbietilton/Compositor/tree/v1.4.6) 源码和格式开发的独立 Windows 移植预览版，非上游官方发行版。旧版发行包与原始 Mac 源码在本地保留。
 
 ## 启动
 
-保存并退出旧版后，双击项目根目录的 `启动Windows版.cmd`，或 `dist/v0.4/Compositor-Windows/Compositor-Windows.exe`。便携包为 `dist/Compositor-Windows-0.4-portable.zip`。解压整个文件夹再运行，不需要安装 Python；请保留 `_internal`、模型和许可证文件。
+保存并退出旧版后，双击项目根目录的 `启动Windows版.cmd`，或 `dist/v0.4.1/Compositor-Windows/Compositor-Windows.exe`。便携包为 `dist/Compositor-Windows-0.4.1-portable.zip`。解压整个文件夹再运行，不需要安装 Python；请保留 `_internal`、模型和许可证文件。
 
 本构建为 Windows x64。已在当前 Windows 主机检查 AMD Radeon 610M 的 OpenGL 合成和 DirectML 主体分割，以及便携 EXE 的 CPU 合成/AI 路径；其他电脑的驱动情况可能不同，GPU 初始化或运行中失败时自动使用 CPU。菜单“帮助 → 关于”显示实际渲染设备。需要手动关闭 GPU 合成时，在启动前设置环境变量 `COMPOSITOR_GPU=off`；AI 推理需要 CPU 时设置 `COMPOSITOR_AI_DEVICE=cpu`。
+
+## 保存位置与权限提示
+
+0.4.1 使用专用保存窗口：点击“浏览”选择已有文件夹，填写工程或文件名称；程序会检查该位置能否写入。不可写时可在同一窗口更换位置，画布不会丢失。保存失败后再次点击保存可重新选择目录。PNG/JPEG、PSD、RAW16 TIFF 共用这个流程，JPEG 格式切换自动更改后缀。
+
+默认优先最近成功输出的位置和可写的程序目录。当前电脑可选择 `E:\project\questions\ps`。现有工程覆盖需确认；取消时保留未保存的修改。详细原因及验证见 [0.4.1 保存修复说明](0.4.1-保存修复说明.md)。
 
 ## 操作
 
@@ -81,7 +87,7 @@ PSD 只支持剪贴到同组的紧邻下方基础层；任意跨组/跳层剪贴
 
 工程使用 `com.compositor.project` v11，支持旧版 `.comp`；新增可选 `windows.isolated` 字段记录 PSD 组隔离语义，原版可忽略此字段。组剪贴等扩展未在 Mac 原程序做双向兼容实测，跨平台请先使用副本。仍未实现 HEIC/SVG、完整 Photoshop 特效、16 位工作空间、选择/修复/内容识别等高级工具。
 
-源码运行：`python -m pip install -r requirements.txt`，然后 `python app.py`。重新打包前用 `python fetch_v03_assets.py` 下载并校验模型，`python create_demo_v04.py` 生成示例，`python build.py` 输出 0.4。回归命令：`python -m unittest -v test_engine test_app test_v02 test_v03 test_v04`。测试样例不随用户便携包提供。
+源码运行：`python -m pip install -r requirements.txt`，然后 `python app.py`。重新打包前用 `python fetch_v03_assets.py` 下载并校验模型，`python create_demo_v04.py` 生成示例，`python build.py` 输出 0.4.1。回归命令：`python -m unittest -v test_engine test_app test_v02 test_v03 test_v04 test_save`。测试样例不随用户便携包提供。
 
 功能验收、实际设备及限制见 `0.4-更新与验收.md`。依赖与模型许可证见 `licenses/` 和 `_internal/models/`。
 
@@ -91,16 +97,16 @@ PSD 只支持剪贴到同组的紧邻下方基础层；任意跨组/跳层剪贴
 使用已安装依赖的同一虚拟环境，源码安装见 README.md。下载脚本可用 `--models-only` 仅获取离线模型；完整测试不加该参数，会下载测试素材并生成自制分层 PSD。
 
 ```powershell
-python -m unittest -v test_engine test_app test_v02 test_v03 test_v04 *> verification/v0.4-tests.txt
-python app.py --verify-v04 verification/v0.4-source --assets verification/v0.3-fixtures
+python -m unittest -v test_engine test_app test_v02 test_v03 test_v04 test_save *> verification/v0.4.1-tests.txt
+python app.py --verify-v04 verification/v0.4.1-source --assets verification/v0.3-fixtures
 python build.py
-$exe = (Resolve-Path dist/v0.4/Compositor-Windows/Compositor-Windows.exe).Path
-Start-Process -FilePath $exe -WindowStyle Hidden -Wait -ArgumentList '--verify-v04 verification/v0.4-frozen --assets verification/v0.3-fixtures'
+$exe = (Resolve-Path dist/v0.4.1/Compositor-Windows/Compositor-Windows.exe).Path
+Start-Process -FilePath $exe -WindowStyle Hidden -Wait -ArgumentList '--verify-v04 verification/v0.4.1-frozen --assets verification/v0.3-fixtures'
 $env:COMPOSITOR_GPU='off'
 $env:COMPOSITOR_AI_DEVICE='cpu'
-Start-Process -FilePath $exe -WindowStyle Hidden -Wait -ArgumentList '--verify-v04 verification/v0.4-frozen-cpu --assets verification/v0.3-fixtures'
+Start-Process -FilePath $exe -WindowStyle Hidden -Wait -ArgumentList '--verify-v04 verification/v0.4.1-frozen-cpu --assets verification/v0.3-fixtures'
 Remove-Item Env:COMPOSITOR_GPU,Env:COMPOSITOR_AI_DEVICE
 python finalize_v04.py
 ```
 
-测试会短暂打开本程序窗口。公开摘要为 `verification/summary-v0.4.json`；最终 ZIP 与 SHA-256 在 `dist/`。
+测试会短暂打开本程序窗口。公开摘要为 `verification/summary-v0.4.1.json`；最终 ZIP 与 SHA-256 在 `dist/`。

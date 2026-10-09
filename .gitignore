@@ -11,8 +11,18 @@ models/*.onnx
 verification/*
 !verification/summary-v0.4.json
 !verification/v0.4-release.json
+!verification/summary-v0.4.1.json
+!verification/v0.4.1-release.json
 !verification/v0.1-baseline/
 verification/v0.1-baseline/*
 !verification/v0.1-baseline/*.py
 .env
 .env.*
+# User output saved next to the portable/source app is never published.
+/*.comp/
+/*.png
+/*.jpg
+/*.jpeg
+/*.psd
+/*.tif
+/*.tiff

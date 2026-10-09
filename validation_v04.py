@@ -14,6 +14,7 @@ from psd_compat import NATIVE
 from rawio import export_raw_tiff,decode_raw
 from typography import text_image
 from app import Editor
+from version import VERSION
 
 
 def verify(output,assets):
@@ -56,7 +57,9 @@ def verify(output,assets):
         if errors:raise RuntimeError("GUI errors: "+"; ".join(errors))
     finally:
         app.messagebox.showerror=original;editor.shutdown();root.destroy()
-    result.update(version="0.4",adjustment_types=12,native_psd_adjustment_types=8,
+    from validation_save import verify as verify_saving
+    result.update(verify_saving(output))
+    result.update(version=VERSION,adjustment_types=12,native_psd_adjustment_types=8,
                   chinese_psd_names=True,compatible_psd_export=True,raw16_tiff=True,
                   all_adjustment_dialogs=True,curve_points_preserved=True,tk_errors=errors)
     (output/"verification-result.json").write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")

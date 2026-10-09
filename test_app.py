@@ -66,12 +66,12 @@ class InterfaceTests(unittest.TestCase):
         self.wait_job()
         self.assertEqual(len(self.editor.document.layers), 2)
         project = self.folder/"demo.comp"
-        with patch("app.filedialog.asksaveasfilename", return_value=str(project)):
+        with patch("app.choose_save_destination", return_value=str(project)):
             self.editor.save()
         self.wait_job()
         self.assertFalse(self.editor.dirty)
         export = self.folder/"image.png"
-        with patch("app.filedialog.asksaveasfilename", return_value=str(export)):
+        with patch("app.choose_save_destination", return_value=str(export)):
             self.editor.export()
         self.wait_job()
         self.assertTrue(export.is_file())
@@ -136,7 +136,7 @@ class InterfaceTests(unittest.TestCase):
 
     def test_cancel_save_keeps_unsaved_changes(self):
         self.editor.dirty = True
-        with patch("app.messagebox.askyesnocancel", return_value=True), patch("app.filedialog.asksaveasfilename", return_value=""):
+        with patch("app.messagebox.askyesnocancel", return_value=True), patch("app.choose_save_destination", return_value=""):
             self.assertFalse(self.editor.confirm_discard())
         self.assertTrue(self.editor.dirty)
 

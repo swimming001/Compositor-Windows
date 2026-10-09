@@ -11,6 +11,7 @@ class Job:
     lock_document: bool
     cancellable: bool
     cancelled: bool = False
+    on_error: object = None
 
 
 class JobRunner:
@@ -18,9 +19,9 @@ class JobRunner:
         self.executor = ThreadPoolExecutor(max_workers=1,thread_name_prefix="document-job")
         self.current = None
 
-    def start(self,label,function,args,on_success,lock_document=False,cancellable=True):
+    def start(self,label,function,args,on_success,lock_document=False,cancellable=True,on_error=None):
         if self.current: raise ValueError("请等待当前操作完成。")
-        self.current = Job(label,self.executor.submit(function,*args),on_success,lock_document,cancellable)
+        self.current = Job(label,self.executor.submit(function,*args),on_success,lock_document,cancellable,on_error=on_error)
         return self.current
 
     def cancel(self):

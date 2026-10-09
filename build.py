@@ -7,7 +7,7 @@ import sys
 
 
 ROOT = Path(__file__).resolve().parent
-VERSION = "0.4"
+from version import VERSION
 
 
 def main():
@@ -23,7 +23,7 @@ def main():
     args.append(str(ROOT/"app.py"))
     subprocess.run(args, cwd=ROOT, check=True)
     release = ROOT/"dist"/f"v{VERSION}"/"Compositor-Windows"
-    for filename in ("README.md", "README-中文.md", "NOTICE.md", "LICENSE", "0.4-更新与验收.md"):
+    for filename in ("README.md", "README-中文.md", "NOTICE.md", "LICENSE", "0.4-更新与验收.md", "0.4.1-保存修复说明.md"):
         shutil.copy2(ROOT/filename, release/filename)
     shutil.copytree(ROOT/"examples", release/"examples", dirs_exist_ok=True)
     shutil.copytree(ROOT/"models",release/"_internal"/"models",dirs_exist_ok=True)

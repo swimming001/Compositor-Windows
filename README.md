@@ -8,6 +8,8 @@
 
 详细操作见 [中文使用说明](README-中文.md)，问题修复与验证见 [0.4 更新与验收](0.4-更新与验收.md)。
 
+当前版本 **0.4.1** 修复保存目录和权限失败后的恢复流程，见 [保存修复说明](0.4.1-保存修复说明.md)。
+
 ## 功能
 
 - 图层、组、蒙版、剪贴、16 种混合与撤销；移动、缩放、旋转、绘制、擦除和裁剪。
@@ -37,8 +39,8 @@ py -3.12 -m venv .venv
 
 ```powershell
 .venv\Scripts\python.exe fetch_v03_assets.py
-.venv\Scripts\python.exe -m unittest -v test_engine test_app test_v02 test_v03 test_v04 *> verification/v0.4-tests.txt
-.venv\Scripts\python.exe app.py --verify-v04 verification/v0.4-source --assets verification/v0.3-fixtures
+.venv\Scripts\python.exe -m unittest -v test_engine test_app test_v02 test_v03 test_v04 test_save *> verification/v0.4.1-tests.txt
+.venv\Scripts\python.exe app.py --verify-v04 verification/v0.4.1-source --assets verification/v0.3-fixtures
 .venv\Scripts\python.exe build.py
 ```
 
