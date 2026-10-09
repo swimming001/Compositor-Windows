@@ -1,0 +1,368 @@
+{
+  "format": "com.compositor.project",
+  "version": 11,
+  "colorSpace": "sRGB",
+  "documentID": "E94E94B5-7EF1-4338-AB20-38AC31CB0494",
+  "width": 1280,
+  "height": 800,
+  "activeLayerID": "4C5767E8-807E-47F3-8CFD-33D5E82CF500",
+  "resolution": 72,
+  "layers": [
+    {
+      "id": "4510ABDC-6635-4F52-8712-E125BDC8FB7A",
+      "name": "深蓝渐变背景",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          0,
+          0
+        ],
+        "size": [
+          1280,
+          800
+        ],
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1,
+      "blendMode": "Normal",
+      "imageFile": "4510ABDC-6635-4F52-8712-E125BDC8FB7A.png"
+    },
+    {
+      "id": "F160E7EB-43CC-4939-BC33-5C6AF1889503",
+      "name": "卡片与组内调整",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          0,
+          0
+        ],
+        "size": [
+          1280,
+          800
+        ],
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": true,
+      "opacity": 1,
+      "blendMode": "Normal"
+    },
+    {
+      "effects": {
+        "shadow": {
+          "enabled": true,
+          "red": 0,
+          "green": 0,
+          "blue": 0,
+          "opacity": 0.7,
+          "angle": 90,
+          "distance": 28,
+          "blur": 20
+        },
+        "stroke": {
+          "enabled": true,
+          "red": 0.3,
+          "green": 0.6,
+          "blue": 1,
+          "opacity": 0.75,
+          "size": 2,
+          "inside": false
+        }
+      },
+      "id": "23ED3B92-1073-449D-B0C0-841100EB2012",
+      "name": "阴影与描边卡片",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          200,
+          150
+        ],
+        "size": [
+          880,
+          500
+        ],
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1,
+      "blendMode": "Normal",
+      "imageFile": "23ED3B92-1073-449D-B0C0-841100EB2012.png",
+      "parentID": "F160E7EB-43CC-4939-BC33-5C6AF1889503"
+    },
+    {
+      "effects": {
+        "outerGlow": {
+          "enabled": true,
+          "red": 0.1,
+          "green": 0.7,
+          "blue": 1,
+          "opacity": 0.75,
+          "size": 15
+        },
+        "innerGlow": {
+          "enabled": true,
+          "red": 1,
+          "green": 1,
+          "blue": 1,
+          "opacity": 0.75,
+          "size": 12
+        },
+        "innerShadow": {
+          "enabled": true,
+          "red": 0,
+          "green": 0,
+          "blue": 0,
+          "opacity": 0.5,
+          "angle": 90,
+          "distance": 15,
+          "blur": 12
+        },
+        "colorOverlay": {
+          "enabled": true,
+          "red": 0.15,
+          "green": 0.6,
+          "blue": 0.95,
+          "opacity": 0.3
+        }
+      },
+      "id": "39C63549-235C-4FA1-99D8-8CB8649C1034",
+      "name": "内外发光示例",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          830,
+          375
+        ],
+        "size": [
+          220,
+          220
+        ],
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1,
+      "blendMode": "Normal",
+      "imageFile": "39C63549-235C-4FA1-99D8-8CB8649C1034.png",
+      "parentID": "F160E7EB-43CC-4939-BC33-5C6AF1889503"
+    },
+    {
+      "adjustment": {
+        "kind": "Exposure",
+        "hue": 0,
+        "saturation": 0,
+        "lightness": 0,
+        "colorize": false,
+        "levels": {
+          "channel": "RGB",
+          "ranges": [
+            {
+              "black": 0,
+              "white": 255,
+              "gamma": 1,
+              "outputBlack": 0,
+              "outputWhite": 255
+            },
+            {
+              "black": 0,
+              "white": 255,
+              "gamma": 1,
+              "outputBlack": 0,
+              "outputWhite": 255
+            },
+            {
+              "black": 0,
+              "white": 255,
+              "gamma": 1,
+              "outputBlack": 0,
+              "outputWhite": 255
+            },
+            {
+              "black": 0,
+              "white": 255,
+              "gamma": 1,
+              "outputBlack": 0,
+              "outputWhite": 255
+            }
+          ]
+        },
+        "curves": {
+          "channel": "RGB",
+          "channels": [
+            [
+              {
+                "x": 0,
+                "y": 0
+              },
+              {
+                "x": 255,
+                "y": 255
+              }
+            ],
+            [
+              {
+                "x": 0,
+                "y": 0
+              },
+              {
+                "x": 255,
+                "y": 255
+              }
+            ],
+            [
+              {
+                "x": 0,
+                "y": 0
+              },
+              {
+                "x": 255,
+                "y": 255
+              }
+            ],
+            [
+              {
+                "x": 0,
+                "y": 0
+              },
+              {
+                "x": 255,
+                "y": 255
+              }
+            ]
+          ]
+        },
+        "exposureSettings": {
+          "exposure": 0.2,
+          "offset": 0,
+          "gamma": 1
+        },
+        "blurRadius": 10
+      },
+      "id": "10841001-037D-4F4D-A8B6-6E2E166ECDEE",
+      "name": "组内曝光 +0.2",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          0,
+          0
+        ],
+        "size": [
+          1280,
+          800
+        ],
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1,
+      "blendMode": "Normal",
+      "parentID": "F160E7EB-43CC-4939-BC33-5C6AF1889503"
+    },
+    {
+      "text": {
+        "content": "MAKE IT YOURS\n随心创作",
+        "fontName": "ArialMT",
+        "fontSize": 64,
+        "red": 1,
+        "green": 1,
+        "blue": 1,
+        "alignment": "Left",
+        "tracking": 1,
+        "leading": 88,
+        "boxSize": [
+          790,
+          210
+        ],
+        "fontRuns": [
+          {
+            "location": 14,
+            "length": 4,
+            "fontName": "MicrosoftYaHei"
+          }
+        ],
+        "colorRuns": [
+          {
+            "location": 14,
+            "length": 4,
+            "red": 0.35,
+            "green": 0.75,
+            "blue": 1
+          }
+        ]
+      },
+      "id": "4C5767E8-807E-47F3-8CFD-33D5E82CF500",
+      "name": "丰富文字排版",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          255,
+          190
+        ],
+        "size": [
+          790,
+          210
+        ],
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1,
+      "blendMode": "Normal",
+      "imageFile": "4C5767E8-807E-47F3-8CFD-33D5E82CF500.png"
+    },
+    {
+      "text": {
+        "content": "Windows 0.3\nGPU · RAW · AI · PSD layers",
+        "fontName": "SegoeUI",
+        "fontSize": 27,
+        "red": 0.7,
+        "green": 0.8,
+        "blue": 0.95,
+        "alignment": "Left",
+        "tracking": 0.5,
+        "leading": 44,
+        "boxSize": [
+          610,
+          140
+        ]
+      },
+      "id": "FCF874DE-F29C-4A18-9DAE-05B1A05D4CD2",
+      "name": "副标题",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          260,
+          440
+        ],
+        "size": [
+          610,
+          140
+        ],
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1,
+      "blendMode": "Normal",
+      "imageFile": "FCF874DE-F29C-4A18-9DAE-05B1A05D4CD2.png"
+    }
+  ],
+  "guides": []
+}

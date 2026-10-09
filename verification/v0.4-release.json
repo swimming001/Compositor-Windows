@@ -1,0 +1,9 @@
+{
+  "version": "0.4",
+  "archive": "Compositor-Windows-0.4-portable.zip",
+  "bytes": 257432707,
+  "sha256": "6cd2da67b4eec39dd1e12620ec36a4a7669257234296497ecce906a40e26315e",
+  "executable_sha256": "a01219ffd51756e6083a7f04c3ac3625aaacc6e4771b81cceaa81b59b333e51c",
+  "regression_tests": 104,
+  "archive_crc": true
+}

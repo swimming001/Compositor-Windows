@@ -1,0 +1,286 @@
+{
+  "format": "com.compositor.project",
+  "version": 11,
+  "colorSpace": "sRGB",
+  "documentID": "354F2D34-A0CA-4B0C-9E42-F31BF2D909E4",
+  "width": 1100,
+  "height": 720,
+  "activeLayerID": "2A54E748-E492-438B-AE29-CBF0AEEAC376",
+  "resolution": 72.0,
+  "layers": [
+    {
+      "id": "6043BD51-C659-436C-AF36-EA74C3431F56",
+      "name": "01 · 暮色天空",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          0.0,
+          0.0
+        ],
+        "size": [
+          1100.0,
+          720.0
+        ],
+        "rotation": 0.0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1.0,
+      "blendMode": "Normal",
+      "imageFile": "6043BD51-C659-436C-AF36-EA74C3431F56.png"
+    },
+    {
+      "id": "0FA7ABEE-2C62-4847-8497-B0259AD095D4",
+      "name": "02 · 落日",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          695.0,
+          175.0
+        ],
+        "size": [
+          230.0,
+          230.0
+        ],
+        "rotation": 0.0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1.0,
+      "blendMode": "Normal",
+      "imageFile": "0FA7ABEE-2C62-4847-8497-B0259AD095D4.png"
+    },
+    {
+      "id": "E0678CD3-C902-41FC-9129-C6B251C020A1",
+      "name": "03 · 远山",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          0.0,
+          320.0
+        ],
+        "size": [
+          1100.0,
+          400.0
+        ],
+        "rotation": 0.0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1.0,
+      "blendMode": "Normal",
+      "imageFile": "E0678CD3-C902-41FC-9129-C6B251C020A1.png"
+    },
+    {
+      "id": "C8F2A762-A1CC-4AA0-8464-AE58FE07DA2B",
+      "name": "04 · 前景",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          0.0,
+          440.0
+        ],
+        "size": [
+          1100.0,
+          280.0
+        ],
+        "rotation": 0.0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1.0,
+      "blendMode": "Normal",
+      "imageFile": "C8F2A762-A1CC-4AA0-8464-AE58FE07DA2B.png"
+    },
+    {
+      "text": {
+        "content": "CREATE FREELY",
+        "fontName": "SegoeUI",
+        "fontSize": 54,
+        "red": 0.9647058823529412,
+        "green": 0.9019607843137255,
+        "blue": 0.8117647058823529,
+        "alignment": "Left",
+        "tracking": 0,
+        "leading": 0
+      },
+      "id": "2A54E748-E492-438B-AE29-CBF0AEEAC376",
+      "name": "05 · 双击编辑标题",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          55,
+          50
+        ],
+        "size": [
+          388,
+          64
+        ],
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1,
+      "blendMode": "Normal",
+      "imageFile": "2A54E748-E492-438B-AE29-CBF0AEEAC376.png"
+    },
+    {
+      "text": {
+        "content": "WINDOWS 0.2  /  LAYERS, TYPE & ADJUSTMENTS",
+        "fontName": "SegoeUI",
+        "fontSize": 16,
+        "red": 0.8705882352941177,
+        "green": 0.7450980392156863,
+        "blue": 0.6666666666666666,
+        "alignment": "Left",
+        "tracking": 0,
+        "leading": 0
+      },
+      "id": "02D571A4-DF93-43A3-881B-4D670436F85C",
+      "name": "06 · 可编辑副标题",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          59,
+          125
+        ],
+        "size": [
+          371,
+          37
+        ],
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1,
+      "blendMode": "Normal",
+      "imageFile": "02D571A4-DF93-43A3-881B-4D670436F85C.png"
+    },
+    {
+      "adjustment": {
+        "kind": "Exposure",
+        "hue": 0,
+        "saturation": 0,
+        "lightness": 0,
+        "colorize": false,
+        "levels": {
+          "channel": "RGB",
+          "ranges": [
+            {
+              "black": 0,
+              "white": 255,
+              "gamma": 1,
+              "outputBlack": 0,
+              "outputWhite": 255
+            },
+            {
+              "black": 0,
+              "white": 255,
+              "gamma": 1,
+              "outputBlack": 0,
+              "outputWhite": 255
+            },
+            {
+              "black": 0,
+              "white": 255,
+              "gamma": 1,
+              "outputBlack": 0,
+              "outputWhite": 255
+            },
+            {
+              "black": 0,
+              "white": 255,
+              "gamma": 1,
+              "outputBlack": 0,
+              "outputWhite": 255
+            }
+          ]
+        },
+        "curves": {
+          "channel": "RGB",
+          "channels": [
+            [
+              {
+                "x": 0,
+                "y": 0
+              },
+              {
+                "x": 255,
+                "y": 255
+              }
+            ],
+            [
+              {
+                "x": 0,
+                "y": 0
+              },
+              {
+                "x": 255,
+                "y": 255
+              }
+            ],
+            [
+              {
+                "x": 0,
+                "y": 0
+              },
+              {
+                "x": 255,
+                "y": 255
+              }
+            ],
+            [
+              {
+                "x": 0,
+                "y": 0
+              },
+              {
+                "x": 255,
+                "y": 255
+              }
+            ]
+          ]
+        },
+        "exposureSettings": {
+          "exposure": 0.15,
+          "offset": 0,
+          "gamma": 1
+        },
+        "blurRadius": 10
+      },
+      "id": "5A27C130-FF3F-49E7-B06A-68529F6BB29E",
+      "name": "07 · 双击调整曝光",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          0,
+          0
+        ],
+        "size": [
+          1100,
+          720
+        ],
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1,
+      "blendMode": "Normal"
+    }
+  ],
+  "guides": []
+}

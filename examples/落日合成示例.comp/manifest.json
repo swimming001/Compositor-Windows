@@ -1,0 +1,128 @@
+{
+  "format": "com.compositor.project",
+  "version": 11,
+  "colorSpace": "sRGB",
+  "documentID": "D4C5DFE1-2104-4B9A-BBF3-43C463359161",
+  "width": 1100,
+  "height": 720,
+  "activeLayerID": "CA6BEEC4-9743-4D68-A190-372828E5BEBF",
+  "resolution": 72,
+  "layers": [
+    {
+      "id": "87539223-6950-463D-8890-B3C789E7A512",
+      "name": "01 · 暮色天空",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          0,
+          0
+        ],
+        "size": [
+          1100,
+          720
+        ],
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1,
+      "blendMode": "Normal",
+      "imageFile": "87539223-6950-463D-8890-B3C789E7A512.png"
+    },
+    {
+      "id": "183A2905-A739-4A24-A1A2-88622B56A1CD",
+      "name": "02 · 落日",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          695,
+          175
+        ],
+        "size": [
+          230,
+          230
+        ],
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1,
+      "blendMode": "Normal",
+      "imageFile": "183A2905-A739-4A24-A1A2-88622B56A1CD.png"
+    },
+    {
+      "id": "B0ABFE3B-3D1D-48A5-8D1F-97477AC7BCFD",
+      "name": "03 · 远山",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          0,
+          320
+        ],
+        "size": [
+          1100,
+          400
+        ],
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1,
+      "blendMode": "Normal",
+      "imageFile": "B0ABFE3B-3D1D-48A5-8D1F-97477AC7BCFD.png"
+    },
+    {
+      "id": "4FE28921-2694-49D3-A3C5-E910222AC4B2",
+      "name": "04 · 前景",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          0,
+          440
+        ],
+        "size": [
+          1100,
+          280
+        ],
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1,
+      "blendMode": "Normal",
+      "imageFile": "4FE28921-2694-49D3-A3C5-E910222AC4B2.png"
+    },
+    {
+      "id": "CA6BEEC4-9743-4D68-A190-372828E5BEBF",
+      "name": "05 · 标题（栅格）",
+      "isVisible": true,
+      "transform": {
+        "origin": [
+          75,
+          65
+        ],
+        "size": [
+          620,
+          135
+        ],
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "sampling": "High quality"
+      },
+      "isGroup": false,
+      "opacity": 1,
+      "blendMode": "Normal",
+      "imageFile": "CA6BEEC4-9743-4D68-A190-372828E5BEBF.png"
+    }
+  ],
+  "guides": []
+}
